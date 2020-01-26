@@ -1,0 +1,54 @@
+# StringNavigationCommanderService CMake config file
+#
+# This file sets the following variables:
+# StringNavigationCommanderService_FOUND - Always TRUE.
+# StringNavigationCommanderService_INCLUDE_DIRS - Directories containing the StringNavigationCommanderService include files.
+# StringNavigationCommanderService_IDL_DIRS - Directories containing the StringNavigationCommanderService IDL files.
+# StringNavigationCommanderService_LIBRARIES - Libraries needed to use StringNavigationCommanderService.
+# StringNavigationCommanderService_DEFINITIONS - Compiler flags for StringNavigationCommanderService.
+# StringNavigationCommanderService_VERSION - The version of StringNavigationCommanderService found.
+# StringNavigationCommanderService_VERSION_MAJOR - The major version of StringNavigationCommanderService found.
+# StringNavigationCommanderService_VERSION_MINOR - The minor version of StringNavigationCommanderService found.
+# StringNavigationCommanderService_VERSION_REVISION - The revision version of StringNavigationCommanderService found.
+# StringNavigationCommanderService_VERSION_CANDIDATE - The candidate version of StringNavigationCommanderService found.
+
+message(STATUS "Found StringNavigationCommanderService-@PROJECT_VERSION@")
+set(StringNavigationCommanderService_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(StringNavigationCommanderService_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(StringNavigationCommanderService_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(StringNavigationCommanderService_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(StringNavigationCommanderService_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(StringNavigationCommanderService_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(StringNavigationCommanderService_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(StringNavigationCommanderService_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(StringNavigationCommanderService_VERSION @PROJECT_VERSION@)
+set(StringNavigationCommanderService_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(StringNavigationCommanderService_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(StringNavigationCommanderService_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(StringNavigationCommanderService_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

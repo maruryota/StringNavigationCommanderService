@@ -1,0 +1,180 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  StringNavigationCommanderServiceTest.cpp
+ * @brief ModuleDescription
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "StringNavigationCommanderServiceTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* stringnavigationcommanderservice_spec[] =
+  {
+    "implementation_id", "StringNavigationCommanderServiceTest",
+    "type_name",         "StringNavigationCommanderServiceTest",
+    "description",       "ModuleDescription",
+    "version",           "1.0.0",
+    "vendor",            "maruryota",
+    "category",          "Category",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+StringNavigationCommanderServiceTest::StringNavigationCommanderServiceTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_currentPoseIn("currentPose", m_currentPose),
+    m_StringNavigationManagerServicePort("StringNavigationManagerService"),
+    m_mapServerPort("mapServer"),
+    m_pathPlannerPort("pathPlanner"),
+    m_pathFollowerPort("pathFollower")
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+StringNavigationCommanderServiceTest::~StringNavigationCommanderServiceTest()
+{
+}
+
+
+
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  
+  // Set OutPort buffer
+  addOutPort("currentPose", m_currentPoseOut);
+  
+  // Set service provider to Ports
+  m_mapServerPort.registerProvider("mapServer", "RTC::OGMapper", m_mapServer);
+  m_pathPlannerPort.registerProvider("pathPlanner", "RTC::PathPlanner", m_pathPlanner);
+  m_pathFollowerPort.registerProvider("pathFollower", "RTC::PathFollower", m_pathFollower);
+  
+  // Set service consumers to Ports
+  m_StringNavigationManagerServicePort.registerConsumer("StringNavigationManagerService", "ogata::StringNavigationCommanderService", m_StringNavigationManagerService);
+  
+  // Set CORBA Service Ports
+  addPort(m_StringNavigationManagerServicePort);
+  addPort(m_mapServerPort);
+  addPort(m_pathPlannerPort);
+  addPort(m_pathFollowerPort);
+  
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+  
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t StringNavigationCommanderServiceTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+ 
+  void StringNavigationCommanderServiceTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(stringnavigationcommanderservice_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<StringNavigationCommanderServiceTest>,
+                             RTC::Delete<StringNavigationCommanderServiceTest>);
+  }
+  
+};
+
+
