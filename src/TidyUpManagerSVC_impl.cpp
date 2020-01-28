@@ -46,7 +46,8 @@ ogata::RETURN_VALUE ogata_TidyUpManagerSVC_impl::tidyup(const RTC::Pose2D& path)
 /*
  * Example implementational code for IDL interface ogata::StringNavigationCommanderService
  */
-ogata_StringNavigationCommanderServiceSVC_impl::ogata_StringNavigationCommanderServiceSVC_impl()
+ogata_StringNavigationCommanderServiceSVC_impl::ogata_StringNavigationCommanderServiceSVC_impl():
+	m_currentPoseIn("currentPose", m_currentPose), m_mapServerPort("mapServer"), m_pathPlannerPort("pathPlanner"), m_pathFollowerPort("pathFollower")
 {
   // Please add extra constructor code here.
 }
