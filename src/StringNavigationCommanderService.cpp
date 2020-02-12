@@ -78,6 +78,9 @@ RTC::ReturnCode_t StringNavigationCommanderService::onInitialize()
   addPort(m_mapServerPort);
   addPort(m_pathPlannerPort);
   addPort(m_pathFollowerPort);
+
+  /// この関数でRTC本体へのポインタをセットしないと動作しない
+  m_StringNavigationManagerService.setRTC(this);
   
   // </rtc-template>
 
@@ -108,26 +111,39 @@ RTC::ReturnCode_t StringNavigationCommanderService::onShutdown(RTC::UniqueId ec_
 }
 */
 
-/*
+
 RTC::ReturnCode_t StringNavigationCommanderService::onActivated(RTC::UniqueId ec_id)
 {
-  return RTC::RTC_OK;
+    /*
+    // この部分はRTCをアクティブ化するときに呼ばれる。
+    // この部分を実行すると、TidyUpManagerからのStringNavigationManagerSErvice::move関数呼び出しがなくても
+    /// move関数の中身をデバッグできる。
+    m_currentPoseBuffer.tm.sec = 0;
+    m_currentPoseBuffer.tm.nsec = 0;
+    m_currentPoseBuffer.data.position.x = 0;
+    m_currentPoseBuffer.data.position.y = 0;
+    m_currentPoseBuffer.data.heading = 0;
+    TimedPose2D path = m_currentPoseBuffer;
+    m_StringNavigationManagerService.move(path);
+     */
+    return RTC::RTC_OK;
 }
-*/
 
-/*
 RTC::ReturnCode_t StringNavigationCommanderService::onDeactivated(RTC::UniqueId ec_id)
 {
   return RTC::RTC_OK;
 }
-*/
 
-/*
 RTC::ReturnCode_t StringNavigationCommanderService::onExecute(RTC::UniqueId ec_id)
 {
+    if (m_currentPoseIn.isNew()) {
+        m_currentPoseIn.read();
+        m_currentPoseBuffer = m_currentPose; // この代入は本来は必要ない
+        // m_currentPoseという変数自体がバッファだから。
+        // だがわかりやすくするため。
+    }
   return RTC::RTC_OK;
 }
-*/
 
 /*
 RTC::ReturnCode_t StringNavigationCommanderService::onAborting(RTC::UniqueId ec_id)
