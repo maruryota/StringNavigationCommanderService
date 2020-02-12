@@ -9,6 +9,8 @@
 
 #include "StringNavigationCommanderService.h"
 
+using namespace ogata_lab;
+
 // Module specification
 // <rtc-template block="module_spec">
 static const char* stringnavigationcommanderservice_spec[] =

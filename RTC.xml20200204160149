@@ -19,13 +19,13 @@
     </rtc:Actions>
     <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="C:\Program Files\OpenRTM-aist\1.2.0\rtm\idl\ExtendedDataTypes.idl" rtc:type="RTC::TimedPose2D" rtc:name="currentPose" rtc:portType="DataInPort"/>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="StringNavigationManagerService">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="ogata::StringNavigationCommanderService" rtc:idlFile="C:\Users\ogata\workspaces\TargetManager2\TargetManager\idl\TidyUpManager.idl" rtc:instanceName="" rtc:direction="Provided" rtc:name="StringNavigationManagerService"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="ogata::StringNavigationCommanderService" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\TidyUpManager.idl" rtc:instanceName="" rtc:direction="Provided" rtc:name="StringNavigationManagerService"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="mapServer">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::OGMapper" rtc:idlFile="\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="mapServer"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::OGMapServer" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="mapServer"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="pathPlanner">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathPlanner" rtc:idlFile="\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathPlanner"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathPlanner" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathPlanner"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="pathFollower">
         <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathFollower" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathFollower"/>

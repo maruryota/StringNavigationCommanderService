@@ -15,18 +15,22 @@
 
 #include <rtm/idl/InterfaceDataTypesSkel.h>
 
+// Service Consumer stub headers
+// <rtc-template block="consumer_stub_h">
+#include "MobileRobotStub.h"
+#include "ExtendedDataTypesStub.h"
+
+// </rtc-template>
+
+// Service Consumer stub headers
+// <rtc-template block="port_stub_h">
+// </rtc-template>
+
 #include <rtm/Manager.h>
 #include <rtm/DataFlowComponentBase.h>
 #include <rtm/CorbaPort.h>
 #include <rtm/DataInPort.h>
 #include <rtm/DataOutPort.h>
-
-#include "MobileRobot.hh"
-
-namespace ogata_lab {
-	class StringNavigationCommanderService;
-}
-
 
 #ifndef TIDYUPMANAGERSVC_IMPL_H
 #define TIDYUPMANAGERSVC_IMPL_H
@@ -55,7 +59,7 @@ class ogata_TidyUpManagerSVC_impl
    virtual ~ogata_TidyUpManagerSVC_impl();
 
    // attributes and operations
-   ogata::RETURN_VALUE tidyup(const RTC::TimedPose2D& path, const RTC::TimedString& kind);
+   ogata::RETURN_VALUE tidyup(const RTC::Pose2D& path);
 
 };
 
@@ -83,10 +87,7 @@ class ogata_StringNavigationCommanderServiceSVC_impl
    virtual ~ogata_StringNavigationCommanderServiceSVC_impl();
 
    // attributes and operations
-   ogata::RETURN_VALUE move(const RTC::TimedPose2D& path);
-
-   ogata_lab::StringNavigationCommanderService* m_pRTC;
-   void setRTC(ogata_lab::StringNavigationCommanderService* pRTC) { m_pRTC = pRTC; }
+   ogata::RETURN_VALUE move(const RTC::Pose2D& path);
 
    RTC::TimedPose2D m_currentPose;
    /*!
@@ -144,7 +145,7 @@ class ogata_PickerSVC_impl
    virtual ~ogata_PickerSVC_impl();
 
    // attributes and operations
-   ogata::RETURN_VALUE pick(const RTC::TimedString& kind);
+   ogata::RETURN_VALUE pick();
 
 };
 
@@ -172,7 +173,7 @@ class ogata_DroperSVC_impl
    virtual ~ogata_DroperSVC_impl();
 
    // attributes and operations
-   ogata::RETURN_VALUE drop(const RTC::TimedString& kind);
+   ogata::RETURN_VALUE drop();
 
 };
 

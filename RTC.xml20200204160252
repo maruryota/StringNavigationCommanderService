@@ -22,13 +22,13 @@
         <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="ogata::StringNavigationCommanderService" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\TidyUpManager.idl" rtc:instanceName="" rtc:direction="Provided" rtc:name="StringNavigationManagerService"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="mapServer">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::OGMapper" rtc:idlFile="\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="mapServer"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::OGMapServer" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="mapServer"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="pathPlanner">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathPlanner" rtc:idlFile="\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathPlanner"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathPlanner" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathPlanner"/>
     </rtc:ServicePorts>
     <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="LEFT" rtc:name="pathFollower">
-        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathFollower" rtc:idlFile="\idl\TidyUpManager.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathFollower"/>
+        <rtc:ServiceInterface xsi:type="rtcExt:serviceinterface_ext" rtcExt:variableName="" rtc:path="" rtc:type="RTC::PathFollower" rtc:idlFile="C:\Users\ogata\AppData\Roaming\.openrtp\idl\MobileRobot.idl" rtc:instanceName="" rtc:direction="Required" rtc:name="pathFollower"/>
     </rtc:ServicePorts>
     <rtc:Language xsi:type="rtcExt:language_ext" rtc:kind="C++"/>
 </rtc:RtcProfile>
