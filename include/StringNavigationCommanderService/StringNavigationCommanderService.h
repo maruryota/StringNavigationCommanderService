@@ -311,7 +311,7 @@ namespace ogata_lab {
 			return m_pathPlanner->planPath(param, outPath);
 		}
 
-		RTC::RETURN_VALUE pathFollow(RTC::Path2D_var& outPath) {
+		RTC::RETURN_VALUE pathFollow(RTC::Path2D& outPath) {
 			return m_pathFollower->followPath(outPath);
 		}
 

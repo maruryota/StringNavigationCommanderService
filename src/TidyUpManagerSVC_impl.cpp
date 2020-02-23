@@ -74,12 +74,15 @@ ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const R
 		//if (m_currentPoseIn.isNew()) {
 	  //	  m_currentPoseIn.read();
 		//}
+
+	  
+
+	  
 	  RTC::TimedPose2D currentPose = m_pRTC->getCurrentPose();
 	  //	現在地と目的地が定まる
-	  std::cout << "[RTC::StringCommander]	Current	Pose	=	(" << m_currentPose.data.position.x << ",	"
-		  << m_currentPose.data.position.y << ",	" << m_currentPose.data.heading << ")" << std::endl;
-	  std::cout << "[RTC::StringCommander]	Goal	Pose				=	(" << path.data.position.x << ",	"
-		  << path.data.position.y << ",	" << path.data.heading << ")" << std::endl;
+	  std::cout << "[RTC::StringCommander]	Current	Pose	=	(" << currentPose.data.position.x << ",	"
+		  << currentPose.data.position.y << ",	" << currentPose.data.heading << ")" << std::endl;
+	  
 	  //	マップを要求する
 	  RTC::OGMap_var outMap;		//	マップを格納するための変数
 	  RTC::RETURN_VALUE	retval = m_pRTC->requestCurrentBuiltMap(outMap);
@@ -96,10 +99,16 @@ ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const R
 	  RTC::PathPlanParameter	param;
 	  param.map = outMap;	//	マップ
 	  param.currentPose = this->m_currentPose.data;	//	スタート
+	  RTC::Pose2D p;
+	  p.position= currentPose.data.position;
+	  p.heading = currentPose.data.heading;
+	  param.currentPose = p;
 	  RTC::Pose2D pose_;
 	  pose_.position = path.data.position;
-	  pose_.heading = path.data.heading;
+	  pose_.heading = 0;
 	  param.targetPose = pose_;	//	ゴール
+	  std::cout << "[RTC::StringCommander]	Goal	Pose				=	(" << pose_.position.x << ",	"
+		  << pose_.position.y << ",	" << pose_.heading << ")" << std::endl;
 	  param.distanceTolerance = 1.0;	//	軌道からの位置のずれの許容差
 	  param.headingTolerance = 1.0;	//	軌道からの角度のずれの許容差
 	  param.maxSpeed.vx = 5.0;	param.maxSpeed.vy = 0.0;	param.maxSpeed.va = 1.0;	//	最大㏿度
