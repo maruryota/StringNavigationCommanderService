@@ -67,13 +67,14 @@ ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const R
 {
   // Please insert your code here and remove the following warning pragma
 #ifndef WIN32
-  #warning "Code missing in function <ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const RTC::TimedPose2D& path)>"
+	#warning "Code missing in function <ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const RTC::TimedPose2D& path)>"
 #endif
 
-	  //	現在のロボットの位置を取得
-	  if (m_currentPoseIn.isNew()) {
-		  m_currentPoseIn.read();
-	  }
+		//	現在のロボットの位置を取得
+		//if (m_currentPoseIn.isNew()) {
+	  //	  m_currentPoseIn.read();
+		//}
+	  RTC::TimedPose2D currentPose = m_pRTC->getCurrentPose();
 	  //	現在地と目的地が定まる
 	  std::cout << "[RTC::StringCommander]	Current	Pose	=	(" << m_currentPose.data.position.x << ",	"
 		  << m_currentPose.data.position.y << ",	" << m_currentPose.data.heading << ")" << std::endl;
@@ -81,8 +82,8 @@ ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const R
 		  << path.data.position.y << ",	" << path.data.heading << ")" << std::endl;
 	  //	マップを要求する
 	  RTC::OGMap_var outMap;		//	マップを格納するための変数
-	  //RTC::RETURN_VALUE	retval = m_mapServer->requestCurrentBuiltMap(outMap);
-	  RTC::RETURN_VALUE retval = m_pRTC->setMap(outMap);
+	  RTC::RETURN_VALUE	retval = m_pRTC->requestCurrentBuiltMap(outMap);
+	  //RTC::RETURN_VALUE retval = m_pRTC->setMap(outMap);
 	  if (retval == RTC::RETURN_VALUE::RETVAL_OK) {
 		  std::cout << "[RTC::StringCommander]	Map	Request	OK." << std::endl;
 	  }

@@ -128,7 +128,7 @@ namespace ogata_lab {
 			*
 			*
 			*/
-			// virtual RTC::ReturnCode_t onActivated(RTC::UniqueId ec_id);
+			 virtual RTC::ReturnCode_t onActivated(RTC::UniqueId ec_id);
 
 			/***
 			 *
@@ -141,7 +141,7 @@ namespace ogata_lab {
 			 *
 			 *
 			 */
-			 // virtual RTC::ReturnCode_t onDeactivated(RTC::UniqueId ec_id);
+			  virtual RTC::ReturnCode_t onDeactivated(RTC::UniqueId ec_id);
 
 			 /***
 			  *
@@ -154,7 +154,7 @@ namespace ogata_lab {
 			  *
 			  *
 			  */
-			  // virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
+			   virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
 
 			  /***
 			   *
@@ -300,7 +300,10 @@ namespace ogata_lab {
 		// </rtc-template>
 
 	public:
-		RTC::RETURN_VALUE setMap(RTC::OGMap_var& outmap) {
+
+		/// このメソッドの名前を変更。
+		/// RTC本体を通してサービスポートを呼ぶのは正解
+		RTC::RETURN_VALUE requestCurrentBuiltMap(RTC::OGMap_var& outmap) {
 			return m_mapServer->requestCurrentBuiltMap(outmap);
 		}
 
@@ -312,6 +315,14 @@ namespace ogata_lab {
 			return m_pathFollower->followPath(outPath);
 		}
 
+		/// 現在の位置データを保存するための変数。onExecuteでこの変数に最新データを代入しておく。
+		RTC::TimedPose2D m_currentPoseBuffer;
+
+		/// 現在の位置データを取得するための関数。このままだとonExecuteで最新データが代入する前に呼ばれるとエラーになる可能性がある。
+		RTC::TimedPose2D getCurrentPose() {
+			return m_currentPoseBuffer;
+		}
+		
 	};
 
 

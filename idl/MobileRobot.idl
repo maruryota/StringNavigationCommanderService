@@ -124,10 +124,6 @@ module RTC {
     RETURN_VALUE followPathNonBlock(in Path2D path);
   };
 
-  interface TidyUpManager {
-	  RETURN_VALUE tidyup(in Path2D path);
-  };
-
 };
 
 #endif
