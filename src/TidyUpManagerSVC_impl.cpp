@@ -104,14 +104,39 @@ ogata::RETURN_VALUE ogata_StringNavigationCommanderServiceSVC_impl::move(const R
 	  p.heading = currentPose.data.heading;
 	  param.currentPose = p;
 	  RTC::Pose2D pose_;
-	  pose_.position = path.data.position;
-	  pose_.heading = 0;
+
+	  // 目標座標を手前にする処理
+	  RTC::Pose2D target_pose, v, changed_v, adjusted_target_pose, v2;
+	  target_pose.position = path.data.position;
+	  target_pose.heading = 0;
+	  v.position.x = target_pose.position.x - param.currentPose.position.x;
+	  v.position.y = target_pose.position.y - param.currentPose.position.y;
+	  float s = std::sqrt(std::pow(v.position.x, 2) + std::pow(v.position.y, 2));
+	  float duration = 0.6;
+	  float ratio = (s - duration) / s;
+	  changed_v.position.x = v.position.x * ratio;
+	  changed_v.position.y = v.position.y * ratio;
+
+	  adjusted_target_pose.position.x = changed_v.position.x + currentPose.data.position.x;
+	  adjusted_target_pose.position.y = changed_v.position.y + currentPose.data.position.y;
+
+	  v2.position.x = target_pose.position.x - adjusted_target_pose.position.x;
+	  v2.position.y = target_pose.position.y - adjusted_target_pose.position.y;
+
+
+
+	  //pose_.position = path.data.position;
+	  pose_.position = adjusted_target_pose.position;
+	  //pose_.heading = 0;
+	  pose_.heading = std::atan2(v2.position.y, v2.position.x);
 	  param.targetPose = pose_;	//	ゴール
-	  std::cout << "[RTC::StringCommander]	Goal	Pose				=	(" << pose_.position.x << ",	"
-		  << pose_.position.y << ",	" << pose_.heading << ")" << std::endl;
+	  std::cout << "[RTC::StringCommander]	Target	Pose				=	(" << target_pose.position.x << ",	"
+		  << target_pose.position.y << ",	" << target_pose.heading << ")" << std::endl;
+	  std::cout << "[RTC::StringCommander]	Goal	Pose				=	(" << param.targetPose.position.x << ",	"
+		  << param.targetPose.position.y << ",	" << param.targetPose.heading << ")" << std::endl;
 	  param.distanceTolerance = 1.0;	//	軌道からの位置のずれの許容差
 	  param.headingTolerance = 1.0;	//	軌道からの角度のずれの許容差
-	  param.maxSpeed.vx = 5.0;	param.maxSpeed.vy = 0.0;	param.maxSpeed.va = 1.0;	//	最大㏿度
+	  param.maxSpeed.vx = 2.0;	param.maxSpeed.vy = 0.0;	param.maxSpeed.va = 1.0;	//	最大㏿度
 	  param.timeLimit.sec = 9999;	param.timeLimit.nsec = 0;	//	許容時間
 	  RTC::Path2D_var	outPath;	//	軌道を格納するための変数
 
